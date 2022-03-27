@@ -4,7 +4,7 @@ import rampwf as rw
 from sklearn.model_selection import StratifiedShuffleSplit
 
 problem_title = 'Chicken meat authenticity classification'
-_prediction_label_names = ["CONV", "1 Star", "ORG", "2 stars", "STD", "FR", "CF", "MAR"]
+_prediction_label_names = ["FR","TH"]
 
 Predictions = rw.prediction_types.make_multiclass(
     label_names=_prediction_label_names)
@@ -20,8 +20,9 @@ def get_cv(X, y):
     cv = StratifiedShuffleSplit(n_splits=10, test_size=0.2, random_state=57)
     return cv.split(X, y)
 
-_target_column_name = 'Production_system'
-_ignore_column_names = ['Sample_number', 'Scan_type', 'Freshness']
+#_target_column_name = 'Production_system'
+_ignore_column_names = ['Sample_number']
+_target_column_name = 'Freshness'
 
 def _read_data(path, f_name):
     data = pd.read_csv(os.path.join(path, 'data', f_name))
